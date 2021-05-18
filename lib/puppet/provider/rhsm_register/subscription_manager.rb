@@ -1,4 +1,5 @@
 #!/usr/bin/ruby
+# coding: utf-8
 # frozen_string_literal: true
 
 #
@@ -247,5 +248,14 @@ Puppet::Type.type(:rhsm_register).provide(:subscription_manager) do
   def self.identity
     Facter.value(:rhsm_identity)
     # Facter::Util::Rhsm_identity.rhsm_identity
+  end
+
+  # What is our environment? (Use the cached fact)
+  # @return [String] the environment set by the Katello or Satellite service
+  #  or an nil if we failed to parse
+  # @api private
+  def self.environment
+    Facter.value(:rhsm_environment)
+    # Facter::Util::Rhsm_environment.rhsm_environment
   end
 end
